@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dk4ebmhukv3cf"]
+[gd_scene load_steps=27 format=3 uid="uid://dk4ebmhukv3cf"]
 
 [ext_resource type="Script" path="res://Frog.gd" id="1_h6cxh"]
 [ext_resource type="Texture2D" uid="uid://ccgqwnwllhae3" path="res://Sunny-land-files/Graphical Assets/spritesheets/frog-idle.png" id="1_pj6b6"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxpedlovlecsr" path="res://Sunny-land-files/Graphical Assets/spritesheets/frog-jump.png" id="2_grnt6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1k4wo"]
-size = Vector2(25, 15)
+size = Vector2(16, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2vphk"]
 atlas = ExtResource("1_vr5sn")
@@ -144,18 +144,21 @@ _data = {
 radius = 155.013
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct301"]
-size = Vector2(25, 18)
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qufh"]
+size = Vector2(27, 11)
 
 [node name="Frog" type="CharacterBody2D"]
 script = ExtResource("1_h6cxh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 3.5)
+position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_1k4wo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kppqf")
-animation = &"Death"
+animation = &"Idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
@@ -168,6 +171,8 @@ tree_root = SubResource("AnimationRootNode_grkoc")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+visible = false
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_jwf7r")
@@ -175,9 +180,16 @@ shape = SubResource("CircleShape2D_jwf7r")
 [node name="PlayerDeath" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeath"]
-position = Vector2(-0.5, 2)
+position = Vector2(-1, 3)
 shape = SubResource("RectangleShape2D_ct301")
+
+[node name="PlayerCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_0qufh")
 
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]
 [connection signal="body_entered" from="PlayerDeath" to="." method="_on_player_death_body_entered"]
+[connection signal="body_entered" from="PlayerCollision" to="." method="_on_player_collision_body_entered"]

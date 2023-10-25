@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsto4mbtx8ty8"]
+[gd_scene load_steps=9 format=3 uid="uid://bsto4mbtx8ty8"]
 
 [ext_resource type="PackedScene" uid="uid://3hv1pq5uwpgx" path="res://Player/Player.tscn" id="1_kqxt0"]
 [ext_resource type="Texture2D" uid="uid://dnafefp4y035j" path="res://sunny-land/assets/environment/tileset.png" id="1_q5xj7"]
 [ext_resource type="Script" path="res://BG.gd" id="2_thxk0"]
 [ext_resource type="Texture2D" uid="uid://ktt3kgc60sjk" path="res://sunny-land/assets/environment/back.png" id="3_8bsp1"]
 [ext_resource type="PackedScene" uid="uid://dk4ebmhukv3cf" path="res://Frog.tscn" id="5_0wnwe"]
+[ext_resource type="Script" path="res://HP.gd" id="6_ryyor"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p2lsb"]
 texture = ExtResource("1_q5xj7")
@@ -467,10 +468,26 @@ position = Vector2(534, 287)
 [node name="Frog" parent="Mobs" instance=ExtResource("5_0wnwe")]
 position = Vector2(720, 352)
 
+[node name="Frog2" parent="Mobs" instance=ExtResource("5_0wnwe")]
+position = Vector2(304, 352)
+
+[node name="Frog3" parent="Mobs" instance=ExtResource("5_0wnwe")]
+position = Vector2(760, 352)
+
+[node name="Frog4" parent="Mobs" instance=ExtResource("5_0wnwe")]
+position = Vector2(648, 352)
+
+[node name="Frog5" parent="Mobs" instance=ExtResource("5_0wnwe")]
+position = Vector2(680, 352)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="HP" type="Label" parent="UI"]
-offset_left = 176.0
-offset_top = 88.0
-offset_right = 336.0
-offset_bottom = 111.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "HP"
+script = ExtResource("6_ryyor")
