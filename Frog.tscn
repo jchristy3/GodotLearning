@@ -144,7 +144,7 @@ _data = {
 radius = 155.013
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct301"]
-size = Vector2(16, 14)
+size = Vector2(16, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qufh"]
 size = Vector2(27, 11)
@@ -158,7 +158,8 @@ shape = SubResource("RectangleShape2D_1k4wo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kppqf")
-animation = &"Idle"
+animation = &"Jump"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
@@ -180,7 +181,7 @@ shape = SubResource("CircleShape2D_jwf7r")
 [node name="PlayerDeath" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeath"]
-position = Vector2(-1, 3)
+position = Vector2(-1, -3)
 shape = SubResource("RectangleShape2D_ct301")
 
 [node name="PlayerCollision" type="Area2D" parent="."]

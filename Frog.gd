@@ -4,6 +4,7 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player
 var chase = false
+var dead = false
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
 @onready var anim = get_node("AnimationPlayer")
@@ -48,11 +49,15 @@ func _on_player_death_body_entered(body):
 
 func _on_player_collision_body_entered(body):
 	if body.name == "Player":
-		body.health -= 3
+		Game.playerHP -= 3
 		death()
 		
 func death():
-	chase = false
-	get_node("AnimatedSprite2D").play("Death")
-	await get_node("AnimatedSprite2D").animation_finished
-	self.queue_free()
+	if not dead:
+		Game.gold += 1
+		Utils.saveGame()
+		dead = true
+		chase = false
+		get_node("AnimatedSprite2D").play("Death")
+		await get_node("AnimatedSprite2D").animation_finished
+		self.queue_free()
